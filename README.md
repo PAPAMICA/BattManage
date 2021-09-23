@@ -3,6 +3,9 @@
 BattManage is a tool selfhosted to manage your batteries !
 ![](https://send.papamica.fr/f.php?h=2JULxRMR&p=1)
 
+## Demo
+=> [Demo here](https://battmanage-demo.papamica.com) <=
+
 ## Installation
 
 Use the docker-compose file to start MongoDB and BattManage.
