@@ -191,6 +191,7 @@ app.post('/add-battery-form', function (req, res) {
     MongoClient.connect(url, function(err, db) {
         delete req.body._id; // for safety reasons
         var dbo = db.db("battmanage");
+        req.body.Cycles = parseInt(req.body.Cycles);
         dbo.collection('batteries').insertOne(req.body);
 
         var query = { Name: req.body.Name }

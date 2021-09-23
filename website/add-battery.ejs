@@ -46,7 +46,11 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <form method="POST" action="/add-battery-form" enctype="application/x-www-form-urlencoded"><input class="form-control" type="text" name="Name" placeholder="Name" style="margin-bottom: 8px;" required><select name="Cells" class="form-select" style="margin-bottom: 8px;" required>
+                            <form method="POST" action="/add-battery-form" enctype="application/x-www-form-urlencoded">
+                                <h5>Name :</h5>
+                                <input class="form-control" type="text" name="Name" placeholder="Name" style="margin-bottom: 8px;" required>
+                                <h5>Cells :</h5>
+                                <select name="Cells" class="form-select" style="margin-bottom: 8px;" required>
                                     <optgroup label="Cells">
                                         <option value="1S" selected="">1S</option>
                                         <option value="2S" selected="">2S</option>
@@ -55,13 +59,17 @@
                                         <option value="5S" selected="">5S</option>
                                         <option value="6S" selected="">6S</option>
                                     </optgroup>
-                                </select><select name="Technology" class="form-select" style="margin-bottom: 8px;">
+                                </select>
+                                <h5>Technology :</h5>
+                                <select name="Technology" class="form-select" style="margin-bottom: 8px;">
                                     <optgroup label="Technology">
                                         <option value="LiPo" selected="">LiPo</option>
                                         <option value="LiOn">LiOn</option>
                                     </optgroup>
                                 </select>
-                            </select><select name="Status" class="form-select" style="margin-bottom: 8px;">
+                            </select>
+                            <h5>Status :</h5>
+                            <select name="Status" class="form-select" style="margin-bottom: 8px;">
                                 <optgroup label="Status">
                                     <option value="Storage" selected="">Storage</option>
                                     <option value="Charged">Charged</option>
@@ -69,7 +77,16 @@
                                     <option value="Out of service">Out of service</option>
                                 </optgroup>
                             </select>
-                            <input class="form-control" type="text" name="Capacity" placeholder="Capacity (mah)" style="margin-bottom: 8px;" inputmode="numeric" required><input class="form-control" type="text" name="Efficiency" placeholder="Efficiency (C)" style="margin-bottom: 8px;" inputmode="numeric" required><input class="form-control" type="text" name="Brand" placeholder="Brand" style="margin-bottom: 8px;" required><input class="form-control" type="date" name="Buy_date" placeholder="Buy date" style="margin-bottom: 8px;" required>
+                            <h5>Capacity :</h5>
+                            <input class="form-control" type="numbeer" name="Capacity" placeholder="Capacity (mah)" style="margin-bottom: 8px;" inputmode="numeric" required>
+                            <h5>Efficiency :</h5>
+                            <input class="form-control" type="number" name="Efficiency" placeholder="Efficiency (C)" style="margin-bottom: 8px;" inputmode="numeric" required>
+                            <h5>Brand :</h5>
+                            <input class="form-control" type="text" name="Brand" placeholder="Brand" style="margin-bottom: 8px;" required>
+                            <h5>Buy date :</h5>
+                            <input class="form-control" type="date" name="Buy_date" placeholder="Buy date" style="margin-bottom: 8px;" required>
+                            <h5>Cycles :</h5>
+                            <input class="form-control" type="number" name="Cycles" value="0" style="margin-bottom: 8px;" inputmode="numeric">
                                 <input type="submit" class="btn btn-primary text-center d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" role="button" style="font-size: 20px;"></input>
                             </form>
                     </div>
