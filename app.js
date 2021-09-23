@@ -167,7 +167,7 @@ app.get("/inventory", function(request, response)  {
             if(err)
             throw err;
         else {
-            response.render('/inventory', { batteries: result, URL: URL });
+            response.render('inventory', { batteries: result, URL: URL });
             //console.log(result);
         }
         });
