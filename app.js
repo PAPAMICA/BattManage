@@ -167,7 +167,7 @@ app.get("/inventory", function(request, response)  {
             if(err)
             throw err;
         else {
-            response.render('inventory', { batteries: result, URL: URL });
+            response.render('/inventory', { batteries: result, URL: URL });
             //console.log(result);
         }
         });
@@ -225,6 +225,7 @@ app.post('/add-battery-form', function (req, res) {
 app.post('/modify-battery-form/:id', function (req, res) {
     MongoClient.connect(url, function(err, db) {
         delete req.body._id; // for safety reasons
+        req.body.Cycles = parseInt(req.body.Cycles);
         var dbo = db.db("battmanage");
         var battery_id = { bID: req.params.id};
         console.log(req.body)
