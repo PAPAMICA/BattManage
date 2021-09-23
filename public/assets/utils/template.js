@@ -43,7 +43,7 @@ const template = (data) => (
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4" style="margin-top: 10px;">Battery Informations</h3>
                     <div class="row">
-                        <div class="col-auto" style="max-width: 400px;">
+                        <div class="col" style="max-width: 250px;">
                         <form method="POST" id="tableForm" action="/batt-informations/getJson">
                             <select name="battery_name" class="form-select-lg align-items-xxl-center" style="font-size: 17px;border-color: rgb(247,247,247);max-width: 100%;">                             
                                     <% for(var i = 0; i < batteries.length; i++) { %>
@@ -85,19 +85,13 @@ const template = (data) => (
                         <form method="POST" action="/batteries/${data.bID}/hs" enctype="application/x-www-form-urlencoded">
                             <button type="submit" class="btn btn-primary" type="button" style="background: var(--bs-red);border-color: var(--bs-red);width: 200px;"><i class="fas fa-dumpster-fire" style="margin-right: 8px;"></i>Out of service</button>
                             </form></div>
-
-                        <div class="col-auto" style="padding-top: 3px;width: 220px;">       
-                        <form method="POST" action="/batteries/${data.bID}/delete" enctype="application/x-www-form-urlencoded">
-                            <button type="submit" class="btn btn-primary" type="button" style="background: var(--bs-red);border-color: var(--bs-red);width: 200px;"><i class="fa fa-trash" style="margin-right: 8px;"></i>Delete</button>
-                            </form></div>
-                    </div>
                     <div class="row justify-content-center align-items-center" style="margin-top: 19px;">
-                    <div class="col" style="max-width: 150px; margin-right: 10px; margin-bottom: 10px;">
+                    <div class="col" style="max-width: 150px; margin-bottom: 10px;">
                     <div class="col" style="max-width: 150px; margin: auto;">
                     <img class="shadow" src="../assets/qrcode/${data.bID}.png" style="max-width: 150px;">
                     </div>
                     </div>
-                        <div class="col" style="min-width: 300px">
+                        <div class="col" style="min-width: 300px; margin-left: 10px;">
                             <h3><%= battery.Name %> <%= battery.Brand %> <%= battery.Cells %> <%= battery.Capacity %> mah</h3>
                             <div class="row">
                                 <div class="col" style="min-width: 300px">
@@ -108,7 +102,7 @@ const template = (data) => (
                                 </div>
                             </div>
                         </div>
-                        <div class="col-auto">
+                        <div class="col" style="min-width: 300px;">
                             <div class="row align-items-center">
                                 <div class="col" style="margin-bottom: 10px;min-width: 300px;">
                                     <div class="card shadow border-start-primary py-2" style="min-height: 94px">
