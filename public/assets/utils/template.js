@@ -43,7 +43,7 @@ const template = (data) => (
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4" style="margin-top: 10px;">Battery Informations</h3>
                     <div class="row">
-                        <div class="col-auto" style="width: 250px;">
+                        <div class="col-auto" style="max-width: 400px;">
                         <form method="POST" id="tableForm" action="/batt-informations/getJson">
                             <select name="battery_name" class="form-select-lg align-items-xxl-center" style="font-size: 17px;border-color: rgb(247,247,247);max-width: 100%;">                             
                                     <% for(var i = 0; i < batteries.length; i++) { %>
@@ -54,7 +54,7 @@ const template = (data) => (
                         </form>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-center align-items-center">
                         <div class="col-auto" style="padding-top: 3px;width: 220px;">
                         <form method="GET" action="/batteries/${data.bID}/edit" enctype="application/x-www-form-urlencoded">
                         <button type="submit" class="btn btn-primary" type="button" style="width: 200px;"><i class="fa fa-edit" style="margin-right: 8px;"></i>Edit</button>
@@ -92,22 +92,26 @@ const template = (data) => (
                             </form></div>
                     </div>
                     <div class="row justify-content-center align-items-center" style="margin-top: 19px;">
-                        <div class="col-auto"><img class="shadow" src="../assets/qrcode/${data.bID}.png" style="max-width: 100px;"></div>
-                        <div class="col-5">
+                    <div class="col" style="max-width: 150px; margin-right: 10px; margin-bottom: 10px;">
+                    <div class="col" style="max-width: 150px; margin: auto;">
+                    <img class="shadow" src="../assets/qrcode/${data.bID}.png" style="max-width: 150px;">
+                    </div>
+                    </div>
+                        <div class="col" style="min-width: 300px">
                             <h3><%= battery.Name %> <%= battery.Brand %> <%= battery.Cells %> <%= battery.Capacity %> mah</h3>
                             <div class="row">
-                                <div class="col">
+                                <div class="col" style="min-width: 300px">
                                     <h6><strong>Brand :</strong> <%= battery.Brand %><br><strong>Cells :</strong> <%= battery.Cells %><br><strong>Capacity :</strong> <%= battery.Capacity %> mah (<%= battery.Efficiency %> C)<br><br></h6>
                                 </div>
-                                <div class="col">
+                                <div class="col" style="min-width: 300px">
                                     <h6><strong>Buy date :</strong> <%= battery.Buy_date %><br><strong>Last Usage :</strong> <%= battery.LastUsage_date %><br><strong>State :</strong> <%= battery.Status %><br><br></h6>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-auto">
                             <div class="row align-items-center">
-                                <div class="col-auto" style="margin-bottom: 10px;width: 270px;">
-                                    <div class="card shadow border-start-primary py-2">
+                                <div class="col" style="margin-bottom: 10px;min-width: 300px;">
+                                    <div class="card shadow border-start-primary py-2" style="min-height: 94px">
                                         <div class="card-body">
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col me-2">
@@ -119,8 +123,8 @@ const template = (data) => (
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-auto" style="margin-bottom: 10px;width: 270px;">
-                                    <div class="card shadow border-start-success py-2">
+                                <div class="col" style="margin-bottom: 10px;min-width: 300px;">
+                                    <div class="card shadow border-start-success py-2" style="min-height: 94px">
                                         <div class="card-body">
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col me-2">
