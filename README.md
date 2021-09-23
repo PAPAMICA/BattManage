@@ -14,10 +14,11 @@ docker-compose up -d
 ```
 
 # To Do
-- How the graphics work
+ - Make graphics work
  - Resolving small display issues
- - QRCode generation
- - Manufacturer logo management (CHNL static for the moment)
+ - QRCode generation ✅ (23/09/2021)
+ - Label generation
+ - Manufacturer logo management
  - Next Battery to use
  - Generate Report
  - Table settings (display by group, page)
