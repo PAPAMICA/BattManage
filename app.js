@@ -11,6 +11,8 @@ var template = require("./public/assets/utils/template.js")
 var path = require('path');
 var fs = require('fs');
 
+const QRCode = require('qrcode');
+
 var bodyParser = require('body-parser');
 var app = express();
 
@@ -210,6 +212,11 @@ app.post('/add-battery-form', function (req, res) {
             else {
                 //console.log(newresult)
                 var pagejs = template(newresult[0])
+                const qrCodeText = `${URL}batteries/${pageid}`;
+                console.log(qrCodeText)
+                const src = `public/assets/qrcode/${pageid}.png`;
+                const stream = fs.createWriteStream(src);
+                QRCode.toFileStream(stream, qrCodeText);
                 fs.writeFile(path.join(__dirname, `website/batteries/${pageid}.ejs`), pagejs, (err) => {
                     if (err) throw err;
                 });

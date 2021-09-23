@@ -20,6 +20,7 @@ services:
     restart: always
     volumes:
       - /apps/battmanage/batteries:/usr/src/app/website/batteries
+      - /apps/battmanage/qrcode:/usr/src/app/public/assets/qrcode
     ports:
       - 4001:4000
     environment:

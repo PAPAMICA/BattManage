@@ -92,7 +92,7 @@ const template = (data) => (
                             </form></div>
                     </div>
                     <div class="row justify-content-center align-items-center" style="margin-top: 19px;">
-                        <div class="col-auto"><img class="shadow" src="../assets/img/logochnl.png" style="max-width: 100px;"></div>
+                        <div class="col-auto"><img class="shadow" src="../assets/qrcode/${data.bID}.png" style="max-width: 100px;"></div>
                         <div class="col-5">
                             <h3><%= battery.Name %> <%= battery.Brand %> <%= battery.Cells %> <%= battery.Capacity %> mah</h3>
                             <div class="row">
