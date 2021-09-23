@@ -27,3 +27,4 @@ services:
       DB_USER: root
       DB_PASSWORD: example
       DB: batt-mongo
+      URL: https://battmanage-demo.papamica.com
