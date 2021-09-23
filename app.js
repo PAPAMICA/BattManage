@@ -5,7 +5,7 @@ var DB = process.env.DB;
 var DB_USER = process.env.DB_USER;
 var DB_PASSWORD = process.env.DB_PASSWORD;
 
-var URL = "http://localhost:4000/"
+var URL = process.env.URL;
 
 var template = require("./public/assets/utils/template.js")
 var path = require('path');
@@ -212,7 +212,7 @@ app.post('/add-battery-form', function (req, res) {
             else {
                 //console.log(newresult)
                 var pagejs = template(newresult[0])
-                const qrCodeText = `${URL}batteries/${pageid}`;
+                const qrCodeText = `${URL}/batteries/${pageid}`;
                 console.log(qrCodeText)
                 const src = `public/assets/qrcode/${pageid}.png`;
                 const stream = fs.createWriteStream(src);
