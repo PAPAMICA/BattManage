@@ -46,12 +46,12 @@
                     </div>
                     <div class="row">
                         <% for(var i = 0; i < batteries.length; i++) { %>
-                        <div class="col" style="max-width: 270px;">
+                        <div class="col" style="max-width: 250px;">
                             <div class="row" style="border-style: solid; width: 270px; height: 100px">
-                                <div class="col-auto">
-                                    <img class="shadow" src="../assets/qrcode/<%= batteries[i].bID %>.png" style="width: 70px; margin-top: 15px;">
+                                <div class="col-auto" style="width: 75px;">
+                                    <img class="shadow" src="../assets/qrcode/<%= batteries[i].bID %>.png" style="width: 70px; margin-top: 15px; margin-left: -5px">
                                 </div>
-                                <div class="col" style="margin-top: 10px;">
+                                <div class="col" style="margin-top: 10px; width: 170px">
                                     <h6 style="font-size: 15px"><%= batteries[i].Name %></h6>
                                     <div class="row">
                                         <div class="col-auto">
