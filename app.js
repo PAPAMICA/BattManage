@@ -99,10 +99,27 @@ app.get("/", function(request, response)  {
                             if(err)
                             throw err;
                         else {
+                            var sort = { LastUsage_date: 1 };
+                            var query_charged = { Status: "Charged", Cells: "6S" };
+                            dbo.collection("batteries").find(query_charged).sort(sort).toArray(function(err, batt6S) {
+                                if(err)
+                                throw err;
+                        else {
+                            var sort = { LastUsage_date: 1 };
+                            var query_charged = { Status: "Charged", Cells: "4S" };
+                            dbo.collection("batteries").find(query_charged).sort(sort).toArray(function(err, batt4S) {
+                                if(err)
+                                throw err;
+                            else {
                             //console.log(used.length);
-                            response.render('index' ,{ logs: logs, storage: storage.length, charged: charged.length, hs: hs.length, used: used.length  });
+                            console.log(batt4S, batt6S)
+                            response.render('index' ,{ b4S: batt4S, b6S: batt6S, logs: logs, storage: storage.length, charged: charged.length, hs: hs.length, used: used.length  });
                         }
                         });
+                    }
+                });
+                    }
+                });
                         
                     }
                     });

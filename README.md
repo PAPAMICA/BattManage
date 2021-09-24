@@ -22,7 +22,7 @@ docker-compose up -d
  - QRCode generation ✅ (23/09/2021)
  - Label generation ✅ (24/09/2021)
  - Manufacturer logo management
- - Next Battery to use
+ - Next Battery to use ✅ (24/09/2021)
  - Generate Report
  - Table settings (display by group, page)
  - Profile by qwad

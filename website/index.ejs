@@ -115,14 +115,23 @@
                         <div class="col" style="margin-bottom: 16px;">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title" style="margin-bottom: 0px;">6S - LiPo #13 POLYDRONE 1300mah<br></h4>
+                                    <% if(locals.b6S != ""){ %>
+                                        <h4 class="card-title" style="margin-bottom: 0px;">6S - <%= b6S[0].Name %> <%= b6S[0].Brand %> <%= b6S[0].Capacity %>mah (<%= b6S[0].Efficiency %>C)<br></h4>
+                                    <% } else{ %> 
+                                        <h4 class="card-title" style="margin-bottom: 0px;">6S - No battery available 😭 <br></h4>
+                                    <% } %>    
+
                                 </div>
                             </div>
                         </div>
                         <div class="col" style="margin-bottom: 16px;">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title" style="margin-bottom: 0px;">4S - LiPo #1 CNHL 650mah<br></h4>
+                                    <% if(locals.b4S != ""){ %>
+                                        <h4 class="card-title" style="margin-bottom: 0px;">4S - <%= b4S[0].Name %> <%= b4S[0].Brand %> <%= b4S[0].Capacity %>mah (<%= b4S[0].Efficiency %>C)<br></h4>
+                                        <% } else{ %> 
+                                            <h4 class="card-title" style="margin-bottom: 0px;">4S - No battery available 😭 <br></h4>
+                                        <% } %>
                                 </div>
                             </div>
                         </div>
