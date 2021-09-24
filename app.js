@@ -112,7 +112,7 @@ app.get("/", function(request, response)  {
                                 throw err;
                             else {
                             //console.log(used.length);
-                            console.log(batt4S, batt6S)
+                            //console.log(batt4S, batt6S)
                             response.render('index' ,{ b4S: batt4S, b6S: batt6S, logs: logs, storage: storage.length, charged: charged.length, hs: hs.length, used: used.length  });
                         }
                         });
@@ -254,6 +254,9 @@ app.post('/add-battery-form', function (req, res) {
                 QRCode.toFileStream(stream, qrCodeText);
                 fs.writeFile(path.join(__dirname, `website/batteries/${pageid}.ejs`), pagejs, (err) => {
                     if (err) throw err;
+                    else {
+                        res.redirect('/inventory');
+                    }
                 });
             }
             });
@@ -261,7 +264,6 @@ app.post('/add-battery-form', function (req, res) {
         });
         
     });    
-    res.redirect('/inventory');
 });
 
 app.post('/modify-battery-form/:id', function (req, res) {
