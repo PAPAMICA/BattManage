@@ -84,7 +84,7 @@ const template = (data) => (
                                 <div class="col-auto" style="padding-top: 3px;width: 220px;">       
                         <form method="POST" action="/batteries/${data.bID}/hs" enctype="application/x-www-form-urlencoded">
                             <button type="submit" class="btn btn-primary" type="button" style="background: var(--bs-red);border-color: var(--bs-red);width: 200px;"><i class="fas fa-dumpster-fire" style="margin-right: 8px;"></i>Out of service</button>
-                            </form></div>
+                            </form></div> 
                     <div class="row justify-content-center align-items-center" style="margin-top: 19px;">
                     <div class="col" style="max-width: 150px; margin-bottom: 10px;">
                     <div class="col" style="max-width: 150px; margin: auto;">

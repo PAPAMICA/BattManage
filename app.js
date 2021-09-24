@@ -177,6 +177,24 @@ app.get("/inventory", function(request, response)  {
     
 });
 
+app.get("/etiquettes", function(request, response)  {
+   
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("battmanage");
+        var query = { Brand: "TBS" };
+        dbo.collection("batteries").find().toArray(function(err, result) {
+            if(err)
+            throw err;
+        else {
+            response.render('etiquettes', { batteries: result, URL: URL });
+            //console.log(result);
+        }
+        });
+      });
+    
+});
+
 app.get("/Update-battery", function(request, response)  {
    
     response.render("Update-battery");

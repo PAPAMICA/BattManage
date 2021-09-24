@@ -20,7 +20,7 @@ docker-compose up -d
  - Make graphics work
  - Resolving small display issues
  - QRCode generation ✅ (23/09/2021)
- - Label generation
+ - Label generation ✅ (24/09/2021)
  - Manufacturer logo management
  - Next Battery to use
  - Generate Report
