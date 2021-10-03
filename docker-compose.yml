@@ -1,40 +1,64 @@
 version: '3.1'
 
 services:
-
   batt-mongo:
     image: mongo
     container_name: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-example}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-battmanage}
+      DB_USER: ${DB_USER:-user}
+      DB_PASS: ${DB_PASS:-password}
+      DB_NAME: ${DB_NAME:-battmanage}
     volumes:
-      - /apps/battmanage/db:/data/db
+      # - /apps/battmanage/db:/data/db
+      - ./database/data:/data/db
+      - ./database/init-db/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
+    ports:
+      - ${DB_PORT:-27017}:${DB_PORT:-27017}
+    networks:
+      - battmanage-network
   
-  #mongo-express:
-  #  image: mongo-express
-  #  restart: always
-  #  ports:
-  #    - 8081:8081
-  #  environment:
-  #    ME_CONFIG_MONGODB_ADMINUSERNAME: root
-  #    ME_CONFIG_MONGODB_ADMINPASSWORD: example
-  #    ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  mongo-express:
+    image: mongo-express
+    depends_on:
+      - batt-mongo
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME:-root}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-example}
+      ME_CONFIG_MONGODB_SERVER: batt-mongo
+    networks:
+      - battmanage-network
 
   battmanage:
     build:
-      context: .
+      context: ./app
       dockerfile: Dockerfile
     container_name: battmanage
+    depends_on:
+      - batt-mongo
     restart: always
     volumes:
-      - /apps/battmanage/batteries:/usr/src/app/website/batteries
-      - /apps/battmanage/qrcode:/usr/src/app/public/assets/qrcode
+      - ./app/:/usr/src/app/
+    #   - /apps/battmanage/batteries:/usr/src/app/client/website/batteries
+    #   - /apps/battmanage/qrcode:/usr/src/app/client/public/assets/qrcode
     ports:
-      - 4001:4000
+      - ${API_MAPPING_PORT:-4001}:${API_PORT:-4000}
     environment:
-      DB_USER: root
-      DB_PASSWORD: example
-      DB: batt-mongo
+      DB_HOST: batt-mongo
+      DB_PORT: ${DB_PORT:-27017}
+      DB_USER: ${DB_USER:-user}
+      DB_PASS: ${DB_PASS:-password}
+      DB_NAME: ${DB_NAME:-battmanage}
       URL: https://battmanage-demo.papamica.com
+    networks:
+      - battmanage-network
+
+networks:
+  battmanage-network:
+    driver: bridge

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>BattManage | Update battery</title>
+    <link rel="icon" type="image/png" sizes="50x50" href="assets/img/logo-batmanage.png?">
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="../../assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/fonts/typicons.min.css">
+    <link rel="stylesheet" href="../../assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="../../assets/css/untitled.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-car-battery"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>BatTManage</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-tachometer-alt"
+                                style="width: 20px;"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link" href="/batteries"><i class="fas fa-battery-half"
+                                style="width: 20px;"></i><span>Battery Informations<br></span></a><a class="nav-link"
+                            href="inventory"><i class="fas fa-clipboard-check"
+                                style="width: 20px;margin-right: 0px;margin-left: 3px;"></i><span>Inventory<br></span></a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4" style="margin-top: 40px;">
+                        <h3 class="text-dark mb-0">Update <%= battery.name %>
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <form method="POST" action="/updateBattery/<%= battery._id %>"
+                                enctype="application/x-www-form-urlencoded">
+                                <h5>Name :</h5>
+                                <input class="form-control" type="text" name="name" value="<%= battery.name %>"
+                                    style="margin-bottom: 8px;" required>
+                                <h5>Status :</h5>
+                                <select name="status" class="form-select" style="margin-bottom: 8px;">
+                                    <optgroup label="Status">
+                                        <option value="Storage">Storage</option>
+                                        <option value="Charged">Charged</option>
+                                        <option value="Used">Used</option>
+                                        <option value="Out of service">Out of service</option>
+                                    </optgroup>
+                                </select>
+                                <h5>Capacity (mah) :</h5>
+                                <input class="form-control" type="number" name="capacity"
+                                    value="<%= battery.capacity %>" style="margin-bottom: 8px;" inputmode="numeric"
+                                    required>
+                                <h5>Efficiency (C) :</h5>
+                                <input class="form-control" type="number" name="efficiency"
+                                    value="<%= battery.efficiency %>" style="margin-bottom: 8px;" inputmode="numeric"
+                                    required>
+                                <h5>Brand :</h5>
+                                <input class="form-control" type="text" name="brand" value="<%= battery.brand %>"
+                                    style="margin-bottom: 8px;" required>
+                                <h5>Buy date :</h5>
+                                <input class="form-control" type="date" name="buyDate" value="<%= battery.buyDate.toISOString().substring(0, 10) %>"
+                                    style="margin-bottom: 8px;" required>
+                                <h5>Last usage date :</h5>
+                                <input class="form-control" type="date" name="lastUsageDate"
+                                    value="<%= battery.lastUsageDate ? battery.lastUsageDate.toISOString().substring(0, 10) : '' %>" style="margin-bottom: 8px;">
+                                <h5>Cycles :</h5>
+                                <input class="form-control" type="number" name="cycles" value="<%= battery.cycles %>"
+                                    style="margin-bottom: 8px;" required>
+                                <h5>Resistance :</h5>
+                                <input class="form-control" type="text" name="resistance"
+                                    value="<%= battery.resistance %>" style="margin-bottom: 8px;" inputmode="numeric">
+                                <input type="submit"
+                                    class="btn btn-primary text-center d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center"
+                                    role="button" style="font-size: 20px;"></input>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <footer class="bg-white sticky-footer" style="height: 25px;">
+                    <div class="container my-auto">
+                        <div class="text-center my-auto copyright"><span>Made by Mickael "PAPAMICA" Asseline</span>
+                        </div>
+                    </div>
+                </footer>
+            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+        <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/chart.min.js"></script>
+        <script src="../../assets/js/bs-init.js"></script>
+        <script src="../../assets/js/theme.js"></script>
+
+
+</body>
+
+</html>
