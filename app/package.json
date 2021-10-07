@@ -1,0 +1,28 @@
+{
+  "name": "lipo-managment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "pm2-runtime start --name 'battmanage'",
+    "stop": "pm2 stop battmanage",
+    "dev": "nodemon  --inspect ./app.js",
+    "lint": "eslint .",
+    "format": "eslint . --fix"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.8",
+    "pm2": "^5.1.2",
+    "qrcode": "^1.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "nodemon": "^2.0.13"
+  }
+}

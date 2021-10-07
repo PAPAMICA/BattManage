@@ -5,11 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>BattManage | Battery Informations</title>
-    <link rel="icon" type="image/png" sizes="50x50" href="assets/img/logo-batmanage.png">
-    <link rel="icon" type="image/png" sizes="50x50" href="assets/img/logo-batmanage.png">
-    <link rel="icon" type="image/png" sizes="50x50" href="assets/img/logo-batmanage.png">
-    <link rel="icon" type="image/png" sizes="50x50" href="assets/img/logo-batmanage.png">
-    <link rel="icon" type="image/png" sizes="50x50" href="assets/img/logo-batmanage.png">
+    <link rel="icon" type="image/png" sizes="50x50" href="assets/img/logo-batmanage.png?">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -22,19 +18,27 @@
 <body id="page-top">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
                     <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-car-battery"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>BatTManage</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-tachometer-alt" style="width: 20px;"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-tachometer-alt"
+                                style="width: 20px;"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"></li>
-                    <li class="nav-item"><a class="nav-link active" href="/batt-informations"><i class="fas fa-battery-half" style="width: 20px;"></i><span>Battery Informations<br></span></a><a class="nav-link" href="inventory"><i class="fas fa-clipboard-check" style="width: 20px;margin-right: 0px;margin-left: 3px;"></i><span>Inventory<br></span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/batteries"><i class="fas fa-battery-half"
+                                style="width: 20px;"></i><span>Battery
+                                Informations<br></span></a><a class="nav-link" href="inventory"><i
+                                class="fas fa-clipboard-check"
+                                style="width: 20px;margin-right: 0px;margin-left: 3px;"></i><span>Inventory<br></span></a>
+                    </li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
@@ -43,14 +47,22 @@
                     <h3 class="text-dark mb-4" style="margin-top: 10px;">Battery Informations</h3>
                     <div class="row">
                         <div class="col-auto" style="width: 300px;">
-                        <form method="POST" id="tableForm" action="/batt-informations/getJson">
-                            <select name="battery_name" class="form-select-lg align-items-xxl-center" style="font-size: 17px;border-color: rgb(247,247,247);max-width: 100%;">                             
-                                    <% for(var i = 0; i < batteries.length; i++) { %>
-                                    <option value="<%= batteries[i].Name %>" selected=""><%= batteries[i].Name %> <%= batteries[i].Brand %> <%= batteries[i].Cells %> <%= batteries[i].Capacity %> mah</option>
-                                    <% } %>  
-                            </select>
-                            <button type="submit" class="btn btn-primary" type="button" style="margin-left: 5px; position: absolute; float: left;"><i class="fas fa-fire"></i></button>
-                        </form>
+                            <form method="POST" id="tableForm" action="/getBattery">
+                                <select name="_id" class="form-select-lg align-items-xxl-center"
+                                    style="font-size: 17px;border-color: rgb(247,247,247);max-width: 100%;">
+                                    <% for(var i=0; i < batteries.length; i++) { %>
+                                        <option value="<%= batteries[i]._id %>" selected="">
+                                            <%= batteries[i].name %>
+                                                <%= batteries[i].brand %>
+                                                    <%= batteries[i].cells %>
+                                                        <%= batteries[i].capacity %> mah
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <button type="submit" class="btn btn-primary" type="button"
+                                    style="margin-left: 5px; position: absolute; float: left;"><i
+                                        class="fas fa-fire"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
