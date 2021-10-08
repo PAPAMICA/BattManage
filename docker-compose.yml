@@ -8,14 +8,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-root}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-example}
-      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-battmanage}
-      DB_USER: ${DB_USER:-user}
-      DB_PASS: ${DB_PASS:-password}
-      DB_NAME: ${DB_NAME:-battmanage}
+      MONGO_INITDB_DATABASE: ${DB_NAME:-battmanage}
     volumes:
       # - /apps/battmanage/db:/data/db
       - ./database/data:/data/db
-      - ./database/init-db/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
     ports:
       - ${DB_PORT:-27017}:${DB_PORT:-27017}
     networks:
@@ -52,8 +48,8 @@ services:
     environment:
       DB_HOST: batt-mongo
       DB_PORT: ${DB_PORT:-27017}
-      DB_USER: ${DB_USER:-user}
-      DB_PASS: ${DB_PASS:-password}
+      DB_USER: ${MONGO_INITDB_ROOT_USERNAME:-root}
+      DB_PASS: ${MONGO_INITDB_ROOT_PASSWORD:-example}
       DB_NAME: ${DB_NAME:-battmanage}
       URL: https://battmanage-demo.papamica.com
     networks:
