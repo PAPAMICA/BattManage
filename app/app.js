@@ -6,7 +6,7 @@ import { createDatabases } from './db-connection.js'
 const port = process.env.API_PORT
 const app = express()
 
-app.use(express.static('./client/public'))
+app.use(express.static('./client/'))
 app.use(express.urlencoded({ extended: false }))
 app.use(routes)
 

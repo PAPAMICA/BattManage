@@ -144,7 +144,7 @@ export const template = (data) => `
                         <div class="row justify-content-center align-items-center" style="margin-top: 19px;">
                             <div class="col" style="max-width: 150px; margin-bottom: 10px;">
                                 <div class="col" style="max-width: 150px; margin: auto;">
-                                    <img class="shadow" src="../assets/qrcode/${data._id}.png"
+                                    <img class="shadow" src="../../website/qrcode/${data._id}.png"
                                         style="max-width: 150px;">
                                 </div>
                             </div>
@@ -203,7 +203,7 @@ export const template = (data) => `
                                                                 class="text-warning"><strong>Resistance</strong><br></span>
                                                         </div>
                                                         <div class="text-dark fw-bold h5 mb-0"><span>
-                                                                <%= battery.resistance %>
+                                                                <%= battery.resistance %> mΩ
                                                             </span></div>
                                                     </div>
                                                     <div class="col-auto"><i class="fas fa-bolt fa-2x text-warning"></i>

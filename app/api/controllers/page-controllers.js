@@ -100,7 +100,7 @@ export const addBatteryMiddleware = async (req, res) => {
   const battery = req.body.battery
 
   const batteriesDir = './client/website/batteries/'
-  const qrcodeDir = './client/public/assets/qrcode/'
+  const qrcodeDir = './client/website/qrcode/'
   if (!fs.existsSync(batteriesDir)) {
     fs.mkdirSync(batteriesDir)
   }
@@ -109,7 +109,7 @@ export const addBatteryMiddleware = async (req, res) => {
   }
 
   const qrCodeText = `${URL}/batteries/${battery._id}`
-  const src = path.join(__dirname, `/client/public/assets/qrcode/${battery._id}.png`)
+  const src = path.join(__dirname, `/client/website/qrcode/${battery._id}.png`)
   const stream = fs.createWriteStream(src)
   await QRCode.toFileStream(stream, qrCodeText)
   const pagejs = template(battery)
