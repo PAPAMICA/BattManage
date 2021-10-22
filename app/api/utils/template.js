@@ -305,7 +305,7 @@ export const template = (data) => `
                                                     <% for(var i=0; i < logs.length; i++) { %>
                                                         <tr>
                                                             <td>
-                                                                <%= logs[i].date %>
+                                                                <%= logs[i].date.toISOString().substring(0, 19).split('T').join(' ') %>
                                                             </td>
                                                             <td>
                                                                 <%= logs[i].action %>

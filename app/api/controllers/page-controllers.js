@@ -1,7 +1,7 @@
 
 import fs from 'fs'
 import path from 'path'
-import QRCode from 'QRCode'
+import QRCode from 'qrcode'
 import { template } from '../utils/template.js'
 import {
   getLogs,
@@ -99,8 +99,16 @@ export const getBatteryMiddleware = async (req, res) => {
 export const addBatteryMiddleware = async (req, res) => {
   const battery = req.body.battery
 
+  const batteriesDir = './client/website/batteries/'
+  const qrcodeDir = './client/public/assets/qrcode/'
+  if (!fs.existsSync(batteriesDir)) {
+    fs.mkdirSync(batteriesDir)
+  }
+  if (!fs.existsSync(qrcodeDir)) {
+    fs.mkdirSync(qrcodeDir)
+  }
+
   const qrCodeText = `${URL}/batteries/${battery._id}`
-  console.log(qrCodeText)
   const src = path.join(__dirname, `/client/public/assets/qrcode/${battery._id}.png`)
   const stream = fs.createWriteStream(src)
   await QRCode.toFileStream(stream, qrCodeText)

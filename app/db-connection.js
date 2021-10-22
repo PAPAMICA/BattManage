@@ -1,7 +1,5 @@
 import mongoose from 'mongoose'
 
-// const DB = process.env.DB
-
 const DB_HOST = process.env.DB_HOST
 const DB_PORT = process.env.DB_PORT
 const DB_USER = process.env.DB_USER
@@ -21,13 +19,11 @@ export const connectToMongo = async (triesLeft = 5) => {
     throw new Error('Impossible de se connecter au serveur MongoDB')
   }
   triesLeft--
-  const mongoDbUri = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
-  // const mongoDbUri = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB}:27017/test`
-  // const mongoDbUri = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB}:27017`
+  const mongoDbUri = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}`
 
   try {
     console.log(`Trying to connect to MongoDB with: ${mongoDbUri}`)
-    await mongoose.connect(mongoDbUri)
+    await mongoose.connect(mongoDbUri, { dbName: DB_NAME })
     console.log('Connected to MongoDB!')
   } catch (error) {
     if (triesLeft > 0) {

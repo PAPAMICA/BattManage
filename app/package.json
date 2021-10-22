@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "pm2-runtime start --name 'battmanage'",
+    "start": "pm2-runtime start --name 'battmanage' node ./app.js",
     "stop": "pm2 stop battmanage",
     "dev": "nodemon  --inspect ./app.js",
     "lint": "eslint .",

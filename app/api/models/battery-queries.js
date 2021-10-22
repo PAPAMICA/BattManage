@@ -23,7 +23,6 @@ export const createBattery = async (batteryData) => {
 
 export const updateBattery = async (batteryData) => {
   const batteryId = batteryData._id
-  // delete batteryData._id
   const battery = await Batterie.findOneAndUpdate({ _id: batteryId }, batteryData, { new: true })
   return battery
 }

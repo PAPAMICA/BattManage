@@ -2,6 +2,7 @@ import routes from './api/routes/index.js'
 import express from 'express'
 import { connectToMongo } from './db-connection.js'
 
+const port = process.env.API_PORT
 const app = express()
 
 app.use(express.static('./client/public'))
@@ -18,7 +19,7 @@ const startServer = () => {
     console.log(err)
     throw err
   }
-  app.listen(4000, function () {
+  app.listen(port || 4000, function () {
     console.log('Server started !')
   })
 }
