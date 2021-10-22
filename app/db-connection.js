@@ -1,3 +1,5 @@
+
+import express from 'express'
 import mongoose from 'mongoose'
 
 const DB_HOST = process.env.DB_HOST
@@ -13,7 +15,44 @@ const sleep = (ms) => {
     setTimeout(resolve, ms)
   })
 }
+import MongoClient from 'mongodb'
+//var MongoClient = require('mongodb').MongoClient;
+import { response } from 'express';
 
+export const createDatabases = () => {
+	var url = `mongodb://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}`;
+	var collName1 = "batteries2"
+	var collName2 = "logs"
+	MongoClient.connect(url, function(err, db) {
+    	if (err) throw err;
+    	console.log("Database created!");
+    	var dbo = db.db("battmanage");
+    	dbo.listCollections({name: collName1})
+    	.next(function(err, collinfo) {
+    	    if (collinfo) {
+    	        console.log(`Collection ${collName1} exist already!`);
+    	    } else {
+     	   dbo.createCollection(collName1, function(err, res) {
+     	     if (err) throw err;
+      	    console.log(`Collection ${collName1} created!`);
+      	    db.close();
+      	  });
+   		 };
+   		 });
+    	dbo.listCollections({name: collName2})
+    	.next(function(err, collinfo) {
+        	if (collinfo) {
+            	console.log(`Collection ${collName2} exist already!`);
+        	} else {
+        	dbo.createCollection(collName2, function(err, res) {
+          	if (err) throw err;
+          	console.log(`Collection ${collName2} created!`);
+          	db.close();
+        	});
+	    };
+	    });
+	});
+}
 export const connectToMongo = async (triesLeft = 5) => {
   if (closeConnection || triesLeft <= 0) {
     throw new Error('Impossible de se connecter au serveur MongoDB')

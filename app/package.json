@@ -18,7 +18,8 @@
     "express": "^4.17.1",
     "mongoose": "^6.0.8",
     "pm2": "^5.1.2",
-    "qrcode": "^1.4.4"
+    "qrcode": "^1.4.4",
+    "mongodb": "^2.2.33"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

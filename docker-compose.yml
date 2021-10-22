@@ -1,60 +1,65 @@
 version: '3.1'
 
 services:
-  batt-mongo:
+
+  battmanage-db:
     image: mongo
-    container_name: mongo
+    container_name: battmanage-db
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-root}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-example}
-      MONGO_INITDB_DATABASE: ${DB_NAME:-battmanage}
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
-      # - /apps/battmanage/db:/data/db
-      - ./database/data:/data/db
-    ports:
-      - ${DB_PORT:-27017}:${DB_PORT:-27017}
-    networks:
-      - battmanage-network
-  
-  mongo-express:
-    image: mongo-express
-    depends_on:
-      - batt-mongo
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME:-root}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-example}
-      ME_CONFIG_MONGODB_SERVER: batt-mongo
-    networks:
-      - battmanage-network
+      - /apps/battmanage/db:/data/db
 
-  battmanage:
-    build:
-      context: ./app
-      dockerfile: Dockerfile
+    # Facultatif  
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://grafana.papamica.fr:3100/loki/api/v1/push"
+        loki-external-labels: service={{.Name}}
+    networks:
+      - proxy
+
+  battmanage-demo:
+    image: papamica/battmanage
     container_name: battmanage
-    depends_on:
-      - batt-mongo
     restart: always
     volumes:
-      - ./app/:/usr/src/app/
-    #   - /apps/battmanage/batteries:/usr/src/app/client/website/batteries
-    #   - /apps/battmanage/qrcode:/usr/src/app/client/public/assets/qrcode
-    ports:
-      - ${API_MAPPING_PORT:-4001}:${API_PORT:-4000}
+      - /apps/battmanage/data/qrcode:/usr/src/app/client/public/assets/qrcode
+      - /apps/battmanage/data/batteries:/usr/src/app/client/website/batteries
+    depends_on:
+      - battmanage-db
     environment:
-      DB_HOST: batt-mongo
-      DB_PORT: ${DB_PORT:-27017}
-      DB_USER: ${MONGO_INITDB_ROOT_USERNAME:-root}
-      DB_PASS: ${MONGO_INITDB_ROOT_PASSWORD:-example}
-      DB_NAME: ${DB_NAME:-battmanage}
-      URL: https://battmanage-demo.papamica.com
-    networks:
-      - battmanage-network
+      DB_HOST: battmanage-db
+      DB_PORT: 27017
+      DB_USER: root
+      DB_PASS: example
+      DB_NAME: battmanage
+      URL: URL
 
+    # Facultatif  
+    logging:
+      driver: loki
+      options:
+        loki-url: "LOKI_URL"
+        loki-external-labels: service={{.Name}}
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.battmanage.entrypoints=http"
+      - "traefik.http.routers.battmanage.rule=Host(`URL`)"
+      - "traefik.http.middlewares.battmanage-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.battmanage.middlewares=battmanage-https-redirect"
+      - "traefik.http.routers.battmanage-secure.entrypoints=https"
+      - "traefik.http.routers.battmanage-secure.rule=Host(`URL`)"
+      - "traefik.http.routers.battmanage-secure.tls=true"
+      - "traefik.http.routers.battmanage-secure.tls.certresolver=http"
+      - "traefik.http.services.battmanage-secure.loadbalancer.server.port=4000"
+      - "traefik.docker.network=proxy"
+      - "dockupdater.disable=true"
 networks:
-  battmanage-network:
-    driver: bridge
+  proxy:
+    external:
+      name: proxy

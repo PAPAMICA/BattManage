@@ -1,6 +1,7 @@
 import routes from './api/routes/index.js'
 import express from 'express'
 import { connectToMongo } from './db-connection.js'
+import { createDatabases } from './db-connection.js'
 
 const port = process.env.API_PORT
 const app = express()
@@ -14,6 +15,7 @@ app.set('views', './client/website')
 
 const startServer = () => {
   try {
+  	createDatabases()
     connectToMongo()
   } catch (err) {
     console.log(err)
